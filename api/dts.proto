@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package mjpitz.rds.api;
+
+import "github.com/mjpitz/des/api/deps.proto";
+
+option go_package = "api";
+
+message SourceInformation {
+    string url = 2;
+}
+
+message DependencyId {
+    string organization = 1;
+    string module = 2;
+}
+
+message PutRequest {
+    SourceInformation sourceInformation = 1;
+    repeated mjpitz.des.api.DependencyManagementFile managementFiles = 2;
+}
+
+message PutResponse {
+    string code = 1;
+    string message = 2;
+}
+
+message Request {
+    string language = 1; // shard (controlled)
+    string system = 2; // segment (controlled)
+
+    string organization = 5;
+    string module = 6;
+    string direction = 7;
+}
+
+message Response {
+    DependencyId dependency = 1;
+}
+
+message TieredResponse {
+    repeated DependencyId tier = 1;
+}
+
+message GetSourcesRequest {
+    string language = 1; // shard (controlled)
+
+    string organization = 5;
+    string module = 6;
+}
+
+message GetSourcesResponse {
+    SourceInformation source = 1;
+}
+
+message ListLanguagesRequest {
+
+}
+
+message ListLanguagesResponse {
+    repeated string languages = 1;
+}
+
+message ListOrganizationsRequest {
+    string language = 1;
+}
+
+message ListOrganizationsResponse {
+    string language = 1;
+    repeated string organizations = 2;
+}
+
+message ListModulesRequest {
+    string language = 1;
+    string organization = 2;
+}
+
+message ListModulesResponse {
+    string language = 1;
+    string organization = 2;
+    repeated string modules = 3;
+}
+
+service DependencyTrackingService {
+    rpc put(PutRequest) returns (PutResponse);
+
+    rpc getDependencies(Request) returns (stream Response);
+    rpc getTopology(Request) returns (stream Response);
+    rpc getTopologyTiered(Request) returns (stream TieredResponse);
+    rpc getSources(GetSourcesRequest) returns (stream GetSourcesResponse);
+
+    rpc listLanguages(ListLanguagesRequest) returns (ListLanguagesResponse);
+    rpc listOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
+    rpc listModules(ListModulesRequest) returns (ListModulesResponse);
+}
