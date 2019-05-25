@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package mjpitz.rds.api;
+package cloud.deps.rds.api;
 
-import "github.com/mjpitz/des/api/deps.proto";
+import "github.com/deps-cloud/des/api/deps.proto";
 
 option go_package = "api";
 
@@ -17,7 +17,7 @@ message DependencyId {
 
 message PutRequest {
     SourceInformation sourceInformation = 1;
-    repeated mjpitz.des.api.DependencyManagementFile managementFiles = 2;
+    repeated cloud.deps.des.api.DependencyManagementFile managementFiles = 2;
 }
 
 message PutResponse {
