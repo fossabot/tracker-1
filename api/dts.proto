@@ -6,6 +6,11 @@ import "github.com/deps-cloud/des/api/deps.proto";
 
 option go_package = "api";
 
+enum Direction {
+    UPSTREAM = 0;
+    DOWNSTREAM = 1;
+}
+
 message SourceInformation {
     string url = 2;
 }
@@ -21,7 +26,7 @@ message PutRequest {
 }
 
 message PutResponse {
-    string code = 1;
+    int32 code = 1;
     string message = 2;
 }
 
@@ -31,7 +36,7 @@ message Request {
 
     string organization = 5;
     string module = 6;
-    string direction = 7;
+    Direction direction = 7;
 }
 
 message Response {
