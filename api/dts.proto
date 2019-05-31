@@ -86,7 +86,7 @@ message ListModulesResponse {
     repeated string modules = 3;
 }
 
-service DependencyTrackingService {
+service DependencyTracker {
     rpc put(PutRequest) returns (PutResponse);
 
     rpc getDependencies(Request) returns (stream Response);
