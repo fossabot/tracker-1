@@ -88,34 +88,34 @@ message ListModulesResponse {
 }
 
 service DependencyTracker {
-    rpc put(PutRequest) returns (PutResponse) {
+    rpc getDependencies(Request) returns (stream Response) {
         option (google.api.http) = {
-            post: "/v1/dependencies"
-            body: "*"
+            get: "/v1/dependencies"
         };
     }
 
-    rpc getDependencies(Request) returns (stream Response) {
+    rpc put(PutRequest) returns (PutResponse) {
         option (google.api.http) = {
-            get: "/v1/{language}/dependencies/{organization}/{module}"
+            post: "/v1/dependencies/track"
+            body: "*"
         };
     }
 
     rpc getTopology(Request) returns (stream Response) {
         option (google.api.http) = {
-            get: "/v1/{language}/topology/{organization}/{module}"
+            get: "/v1/topology"
         };
     }
 
     rpc getTopologyTiered(Request) returns (stream TieredResponse) {
         option (google.api.http) = {
-            get: "/v1/{language}/topology/{organization}/{module}/tiered"
+            get: "/v1/topology/tiered"
         };
     }
 
     rpc getSources(GetSourcesRequest) returns (stream GetSourcesResponse) {
         option (google.api.http) = {
-            get: "/v1/{language}/sources/{organization}/{module}/tiered"
+            get: "/v1/sources"
         };
     }
 
@@ -127,13 +127,13 @@ service DependencyTracker {
 
     rpc listOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {
         option (google.api.http) = {
-            get: "/v1/{language}/organizations"
+            get: "/v1/organizations"
         };
     }
 
     rpc listModules(ListModulesRequest) returns (ListModulesResponse) {
         option (google.api.http) = {
-            get: "/v1/{language}/modules/{organization}"
+            get: "/v1/modules"
         };
     }
 }
