@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cloud.deps.rds.api;
+package cloud.deps.dts.api;
 
 import "github.com/deps-cloud/des/api/deps.proto";
 import "github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/google/api/annotations.proto";
@@ -13,12 +13,7 @@ enum Direction {
 }
 
 message SourceInformation {
-    string url = 2;
-}
-
-message DependencyId {
-    string organization = 1;
-    string module = 2;
+    string url = 1;
 }
 
 message PutRequest {
@@ -31,9 +26,24 @@ message PutResponse {
     string message = 2;
 }
 
+message DependencyId {
+    string language = 1;
+
+    string organization = 5;
+    string module = 6;
+}
+
+message GetManagedRequest {
+    string url = 1;
+}
+
+message GetManagedResponse {
+    string url = 1;
+    repeated DependencyId managed = 2;
+}
+
 message Request {
-    string language = 1; // shard (controlled)
-    string system = 2; // segment (controlled)
+    string language = 1;
 
     string organization = 5;
     string module = 6;
@@ -98,6 +108,12 @@ service DependencyTracker {
         option (google.api.http) = {
             post: "/v1/dependencies/track"
             body: "*"
+        };
+    }
+
+    rpc getManaged(GetManagedRequest) returns (GetManagedResponse) {
+        option (google.api.http) = {
+            get: "/v1/dependencies/managed"
         };
     }
 

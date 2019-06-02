@@ -34,12 +34,6 @@
             "type": "string"
           },
           {
-            "name": "system",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization",
             "in": "query",
             "required": false,
@@ -61,6 +55,30 @@
               "UPSTREAM"
             ],
             "default": "DOWNSTREAM"
+          }
+        ],
+        "tags": [
+          "DependencyTracker"
+        ]
+      }
+    },
+    "/v1/dependencies/managed": {
+      "get": {
+        "operationId": "getManaged",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetManagedResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -219,12 +237,6 @@
             "type": "string"
           },
           {
-            "name": "system",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization",
             "in": "query",
             "required": false,
@@ -267,12 +279,6 @@
         "parameters": [
           {
             "name": "language",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "system",
             "in": "query",
             "required": false,
             "type": "string"
@@ -331,6 +337,9 @@
     "apiDependencyId": {
       "type": "object",
       "properties": {
+        "language": {
+          "type": "string"
+        },
         "organization": {
           "type": "string"
         },
@@ -372,6 +381,20 @@
         "UPSTREAM"
       ],
       "default": "DOWNSTREAM"
+    },
+    "apiGetManagedResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "managed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDependencyId"
+          }
+        }
+      }
     },
     "apiGetSourcesResponse": {
       "type": "object",

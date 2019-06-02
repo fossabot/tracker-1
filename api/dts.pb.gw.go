@@ -74,6 +74,26 @@ func request_DependencyTracker_Put_0(ctx context.Context, marshaler runtime.Mars
 }
 
 var (
+	filter_DependencyTracker_GetManaged_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_DependencyTracker_GetManaged_0(ctx context.Context, marshaler runtime.Marshaler, client DependencyTrackerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetManagedRequest
+	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_DependencyTracker_GetManaged_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.GetManaged(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+var (
 	filter_DependencyTracker_GetTopology_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
@@ -284,6 +304,26 @@ func RegisterDependencyTrackerHandlerClient(ctx context.Context, mux *runtime.Se
 
 	})
 
+	mux.Handle("GET", pattern_DependencyTracker_GetManaged_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_DependencyTracker_GetManaged_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_DependencyTracker_GetManaged_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_DependencyTracker_GetTopology_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -412,6 +452,8 @@ var (
 
 	pattern_DependencyTracker_Put_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "track"}, ""))
 
+	pattern_DependencyTracker_GetManaged_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "managed"}, ""))
+
 	pattern_DependencyTracker_GetTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topology"}, ""))
 
 	pattern_DependencyTracker_GetTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "topology", "tiered"}, ""))
@@ -429,6 +471,8 @@ var (
 	forward_DependencyTracker_GetDependencies_0 = runtime.ForwardResponseStream
 
 	forward_DependencyTracker_Put_0 = runtime.ForwardResponseMessage
+
+	forward_DependencyTracker_GetManaged_0 = runtime.ForwardResponseMessage
 
 	forward_DependencyTracker_GetTopology_0 = runtime.ForwardResponseStream
 

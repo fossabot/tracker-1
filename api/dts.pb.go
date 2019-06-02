@@ -52,7 +52,7 @@ func (Direction) EnumDescriptor() ([]byte, []int) {
 }
 
 type SourceInformation struct {
-	Url                  string   `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	Url                  string   `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -89,52 +89,6 @@ func (m *SourceInformation) GetUrl() string {
 	return ""
 }
 
-type DependencyId struct {
-	Organization         string   `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
-	Module               string   `protobuf:"bytes,2,opt,name=module,proto3" json:"module,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *DependencyId) Reset()         { *m = DependencyId{} }
-func (m *DependencyId) String() string { return proto.CompactTextString(m) }
-func (*DependencyId) ProtoMessage()    {}
-func (*DependencyId) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{1}
-}
-func (m *DependencyId) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DependencyId.Unmarshal(m, b)
-}
-func (m *DependencyId) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DependencyId.Marshal(b, m, deterministic)
-}
-func (m *DependencyId) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DependencyId.Merge(m, src)
-}
-func (m *DependencyId) XXX_Size() int {
-	return xxx_messageInfo_DependencyId.Size(m)
-}
-func (m *DependencyId) XXX_DiscardUnknown() {
-	xxx_messageInfo_DependencyId.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DependencyId proto.InternalMessageInfo
-
-func (m *DependencyId) GetOrganization() string {
-	if m != nil {
-		return m.Organization
-	}
-	return ""
-}
-
-func (m *DependencyId) GetModule() string {
-	if m != nil {
-		return m.Module
-	}
-	return ""
-}
-
 type PutRequest struct {
 	SourceInformation    *SourceInformation              `protobuf:"bytes,1,opt,name=sourceInformation,proto3" json:"sourceInformation,omitempty"`
 	ManagementFiles      []*api.DependencyManagementFile `protobuf:"bytes,2,rep,name=managementFiles,proto3" json:"managementFiles,omitempty"`
@@ -147,7 +101,7 @@ func (m *PutRequest) Reset()         { *m = PutRequest{} }
 func (m *PutRequest) String() string { return proto.CompactTextString(m) }
 func (*PutRequest) ProtoMessage()    {}
 func (*PutRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{2}
+	return fileDescriptor_a0acf959f89d336e, []int{1}
 }
 func (m *PutRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PutRequest.Unmarshal(m, b)
@@ -193,7 +147,7 @@ func (m *PutResponse) Reset()         { *m = PutResponse{} }
 func (m *PutResponse) String() string { return proto.CompactTextString(m) }
 func (*PutResponse) ProtoMessage()    {}
 func (*PutResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{3}
+	return fileDescriptor_a0acf959f89d336e, []int{2}
 }
 func (m *PutResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PutResponse.Unmarshal(m, b)
@@ -227,12 +181,149 @@ func (m *PutResponse) GetMessage() string {
 	return ""
 }
 
+type DependencyId struct {
+	Language             string   `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
+	Organization         string   `protobuf:"bytes,5,opt,name=organization,proto3" json:"organization,omitempty"`
+	Module               string   `protobuf:"bytes,6,opt,name=module,proto3" json:"module,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DependencyId) Reset()         { *m = DependencyId{} }
+func (m *DependencyId) String() string { return proto.CompactTextString(m) }
+func (*DependencyId) ProtoMessage()    {}
+func (*DependencyId) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a0acf959f89d336e, []int{3}
+}
+func (m *DependencyId) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DependencyId.Unmarshal(m, b)
+}
+func (m *DependencyId) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DependencyId.Marshal(b, m, deterministic)
+}
+func (m *DependencyId) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DependencyId.Merge(m, src)
+}
+func (m *DependencyId) XXX_Size() int {
+	return xxx_messageInfo_DependencyId.Size(m)
+}
+func (m *DependencyId) XXX_DiscardUnknown() {
+	xxx_messageInfo_DependencyId.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DependencyId proto.InternalMessageInfo
+
+func (m *DependencyId) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *DependencyId) GetOrganization() string {
+	if m != nil {
+		return m.Organization
+	}
+	return ""
+}
+
+func (m *DependencyId) GetModule() string {
+	if m != nil {
+		return m.Module
+	}
+	return ""
+}
+
+type GetManagedRequest struct {
+	Url                  string   `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetManagedRequest) Reset()         { *m = GetManagedRequest{} }
+func (m *GetManagedRequest) String() string { return proto.CompactTextString(m) }
+func (*GetManagedRequest) ProtoMessage()    {}
+func (*GetManagedRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a0acf959f89d336e, []int{4}
+}
+func (m *GetManagedRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetManagedRequest.Unmarshal(m, b)
+}
+func (m *GetManagedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetManagedRequest.Marshal(b, m, deterministic)
+}
+func (m *GetManagedRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetManagedRequest.Merge(m, src)
+}
+func (m *GetManagedRequest) XXX_Size() int {
+	return xxx_messageInfo_GetManagedRequest.Size(m)
+}
+func (m *GetManagedRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetManagedRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetManagedRequest proto.InternalMessageInfo
+
+func (m *GetManagedRequest) GetUrl() string {
+	if m != nil {
+		return m.Url
+	}
+	return ""
+}
+
+type GetManagedResponse struct {
+	Url                  string          `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Managed              []*DependencyId `protobuf:"bytes,2,rep,name=managed,proto3" json:"managed,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *GetManagedResponse) Reset()         { *m = GetManagedResponse{} }
+func (m *GetManagedResponse) String() string { return proto.CompactTextString(m) }
+func (*GetManagedResponse) ProtoMessage()    {}
+func (*GetManagedResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a0acf959f89d336e, []int{5}
+}
+func (m *GetManagedResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetManagedResponse.Unmarshal(m, b)
+}
+func (m *GetManagedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetManagedResponse.Marshal(b, m, deterministic)
+}
+func (m *GetManagedResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetManagedResponse.Merge(m, src)
+}
+func (m *GetManagedResponse) XXX_Size() int {
+	return xxx_messageInfo_GetManagedResponse.Size(m)
+}
+func (m *GetManagedResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetManagedResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetManagedResponse proto.InternalMessageInfo
+
+func (m *GetManagedResponse) GetUrl() string {
+	if m != nil {
+		return m.Url
+	}
+	return ""
+}
+
+func (m *GetManagedResponse) GetManaged() []*DependencyId {
+	if m != nil {
+		return m.Managed
+	}
+	return nil
+}
+
 type Request struct {
 	Language             string    `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
-	System               string    `protobuf:"bytes,2,opt,name=system,proto3" json:"system,omitempty"`
 	Organization         string    `protobuf:"bytes,5,opt,name=organization,proto3" json:"organization,omitempty"`
 	Module               string    `protobuf:"bytes,6,opt,name=module,proto3" json:"module,omitempty"`
-	Direction            Direction `protobuf:"varint,7,opt,name=direction,proto3,enum=cloud.deps.rds.api.Direction" json:"direction,omitempty"`
+	Direction            Direction `protobuf:"varint,7,opt,name=direction,proto3,enum=cloud.deps.dts.api.Direction" json:"direction,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -242,7 +333,7 @@ func (m *Request) Reset()         { *m = Request{} }
 func (m *Request) String() string { return proto.CompactTextString(m) }
 func (*Request) ProtoMessage()    {}
 func (*Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{4}
+	return fileDescriptor_a0acf959f89d336e, []int{6}
 }
 func (m *Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Request.Unmarshal(m, b)
@@ -265,13 +356,6 @@ var xxx_messageInfo_Request proto.InternalMessageInfo
 func (m *Request) GetLanguage() string {
 	if m != nil {
 		return m.Language
-	}
-	return ""
-}
-
-func (m *Request) GetSystem() string {
-	if m != nil {
-		return m.System
 	}
 	return ""
 }
@@ -308,7 +392,7 @@ func (m *Response) Reset()         { *m = Response{} }
 func (m *Response) String() string { return proto.CompactTextString(m) }
 func (*Response) ProtoMessage()    {}
 func (*Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{5}
+	return fileDescriptor_a0acf959f89d336e, []int{7}
 }
 func (m *Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Response.Unmarshal(m, b)
@@ -346,7 +430,7 @@ func (m *TieredResponse) Reset()         { *m = TieredResponse{} }
 func (m *TieredResponse) String() string { return proto.CompactTextString(m) }
 func (*TieredResponse) ProtoMessage()    {}
 func (*TieredResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{6}
+	return fileDescriptor_a0acf959f89d336e, []int{8}
 }
 func (m *TieredResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TieredResponse.Unmarshal(m, b)
@@ -386,7 +470,7 @@ func (m *GetSourcesRequest) Reset()         { *m = GetSourcesRequest{} }
 func (m *GetSourcesRequest) String() string { return proto.CompactTextString(m) }
 func (*GetSourcesRequest) ProtoMessage()    {}
 func (*GetSourcesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{7}
+	return fileDescriptor_a0acf959f89d336e, []int{9}
 }
 func (m *GetSourcesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetSourcesRequest.Unmarshal(m, b)
@@ -438,7 +522,7 @@ func (m *GetSourcesResponse) Reset()         { *m = GetSourcesResponse{} }
 func (m *GetSourcesResponse) String() string { return proto.CompactTextString(m) }
 func (*GetSourcesResponse) ProtoMessage()    {}
 func (*GetSourcesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{8}
+	return fileDescriptor_a0acf959f89d336e, []int{10}
 }
 func (m *GetSourcesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetSourcesResponse.Unmarshal(m, b)
@@ -475,7 +559,7 @@ func (m *ListLanguagesRequest) Reset()         { *m = ListLanguagesRequest{} }
 func (m *ListLanguagesRequest) String() string { return proto.CompactTextString(m) }
 func (*ListLanguagesRequest) ProtoMessage()    {}
 func (*ListLanguagesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{9}
+	return fileDescriptor_a0acf959f89d336e, []int{11}
 }
 func (m *ListLanguagesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListLanguagesRequest.Unmarshal(m, b)
@@ -506,7 +590,7 @@ func (m *ListLanguagesResponse) Reset()         { *m = ListLanguagesResponse{} }
 func (m *ListLanguagesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListLanguagesResponse) ProtoMessage()    {}
 func (*ListLanguagesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{10}
+	return fileDescriptor_a0acf959f89d336e, []int{12}
 }
 func (m *ListLanguagesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListLanguagesResponse.Unmarshal(m, b)
@@ -544,7 +628,7 @@ func (m *ListOrganizationsRequest) Reset()         { *m = ListOrganizationsReque
 func (m *ListOrganizationsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListOrganizationsRequest) ProtoMessage()    {}
 func (*ListOrganizationsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{11}
+	return fileDescriptor_a0acf959f89d336e, []int{13}
 }
 func (m *ListOrganizationsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListOrganizationsRequest.Unmarshal(m, b)
@@ -583,7 +667,7 @@ func (m *ListOrganizationsResponse) Reset()         { *m = ListOrganizationsResp
 func (m *ListOrganizationsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListOrganizationsResponse) ProtoMessage()    {}
 func (*ListOrganizationsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{12}
+	return fileDescriptor_a0acf959f89d336e, []int{14}
 }
 func (m *ListOrganizationsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListOrganizationsResponse.Unmarshal(m, b)
@@ -629,7 +713,7 @@ func (m *ListModulesRequest) Reset()         { *m = ListModulesRequest{} }
 func (m *ListModulesRequest) String() string { return proto.CompactTextString(m) }
 func (*ListModulesRequest) ProtoMessage()    {}
 func (*ListModulesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{13}
+	return fileDescriptor_a0acf959f89d336e, []int{15}
 }
 func (m *ListModulesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListModulesRequest.Unmarshal(m, b)
@@ -676,7 +760,7 @@ func (m *ListModulesResponse) Reset()         { *m = ListModulesResponse{} }
 func (m *ListModulesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListModulesResponse) ProtoMessage()    {}
 func (*ListModulesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a0acf959f89d336e, []int{14}
+	return fileDescriptor_a0acf959f89d336e, []int{16}
 }
 func (m *ListModulesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListModulesResponse.Unmarshal(m, b)
@@ -718,82 +802,87 @@ func (m *ListModulesResponse) GetModules() []string {
 }
 
 func init() {
-	proto.RegisterEnum("cloud.deps.rds.api.Direction", Direction_name, Direction_value)
-	proto.RegisterType((*SourceInformation)(nil), "cloud.deps.rds.api.SourceInformation")
-	proto.RegisterType((*DependencyId)(nil), "cloud.deps.rds.api.DependencyId")
-	proto.RegisterType((*PutRequest)(nil), "cloud.deps.rds.api.PutRequest")
-	proto.RegisterType((*PutResponse)(nil), "cloud.deps.rds.api.PutResponse")
-	proto.RegisterType((*Request)(nil), "cloud.deps.rds.api.Request")
-	proto.RegisterType((*Response)(nil), "cloud.deps.rds.api.Response")
-	proto.RegisterType((*TieredResponse)(nil), "cloud.deps.rds.api.TieredResponse")
-	proto.RegisterType((*GetSourcesRequest)(nil), "cloud.deps.rds.api.GetSourcesRequest")
-	proto.RegisterType((*GetSourcesResponse)(nil), "cloud.deps.rds.api.GetSourcesResponse")
-	proto.RegisterType((*ListLanguagesRequest)(nil), "cloud.deps.rds.api.ListLanguagesRequest")
-	proto.RegisterType((*ListLanguagesResponse)(nil), "cloud.deps.rds.api.ListLanguagesResponse")
-	proto.RegisterType((*ListOrganizationsRequest)(nil), "cloud.deps.rds.api.ListOrganizationsRequest")
-	proto.RegisterType((*ListOrganizationsResponse)(nil), "cloud.deps.rds.api.ListOrganizationsResponse")
-	proto.RegisterType((*ListModulesRequest)(nil), "cloud.deps.rds.api.ListModulesRequest")
-	proto.RegisterType((*ListModulesResponse)(nil), "cloud.deps.rds.api.ListModulesResponse")
+	proto.RegisterEnum("cloud.deps.dts.api.Direction", Direction_name, Direction_value)
+	proto.RegisterType((*SourceInformation)(nil), "cloud.deps.dts.api.SourceInformation")
+	proto.RegisterType((*PutRequest)(nil), "cloud.deps.dts.api.PutRequest")
+	proto.RegisterType((*PutResponse)(nil), "cloud.deps.dts.api.PutResponse")
+	proto.RegisterType((*DependencyId)(nil), "cloud.deps.dts.api.DependencyId")
+	proto.RegisterType((*GetManagedRequest)(nil), "cloud.deps.dts.api.GetManagedRequest")
+	proto.RegisterType((*GetManagedResponse)(nil), "cloud.deps.dts.api.GetManagedResponse")
+	proto.RegisterType((*Request)(nil), "cloud.deps.dts.api.Request")
+	proto.RegisterType((*Response)(nil), "cloud.deps.dts.api.Response")
+	proto.RegisterType((*TieredResponse)(nil), "cloud.deps.dts.api.TieredResponse")
+	proto.RegisterType((*GetSourcesRequest)(nil), "cloud.deps.dts.api.GetSourcesRequest")
+	proto.RegisterType((*GetSourcesResponse)(nil), "cloud.deps.dts.api.GetSourcesResponse")
+	proto.RegisterType((*ListLanguagesRequest)(nil), "cloud.deps.dts.api.ListLanguagesRequest")
+	proto.RegisterType((*ListLanguagesResponse)(nil), "cloud.deps.dts.api.ListLanguagesResponse")
+	proto.RegisterType((*ListOrganizationsRequest)(nil), "cloud.deps.dts.api.ListOrganizationsRequest")
+	proto.RegisterType((*ListOrganizationsResponse)(nil), "cloud.deps.dts.api.ListOrganizationsResponse")
+	proto.RegisterType((*ListModulesRequest)(nil), "cloud.deps.dts.api.ListModulesRequest")
+	proto.RegisterType((*ListModulesResponse)(nil), "cloud.deps.dts.api.ListModulesResponse")
 }
 
 func init() { proto.RegisterFile("dts.proto", fileDescriptor_a0acf959f89d336e) }
 
 var fileDescriptor_a0acf959f89d336e = []byte{
-	// 861 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0x5f, 0x8f, 0xdb, 0x44,
-	0x10, 0xc7, 0x49, 0x2f, 0xb9, 0x4c, 0xfe, 0xdc, 0x65, 0xd2, 0x3b, 0xb9, 0xbe, 0x02, 0x61, 0x45,
-	0x4b, 0x5a, 0xf5, 0xe2, 0x23, 0xfc, 0x79, 0xa0, 0x42, 0x02, 0x74, 0x14, 0x15, 0xdd, 0xd1, 0xca,
-	0x09, 0x20, 0x55, 0x42, 0xe0, 0xda, 0x8b, 0xcf, 0xaa, 0xe3, 0x35, 0xde, 0x35, 0x28, 0xf0, 0xc6,
-	0x2b, 0x8f, 0x7c, 0x14, 0x24, 0x24, 0x3e, 0x07, 0x5f, 0x81, 0x0f, 0x82, 0xbc, 0x5e, 0x3b, 0x4e,
-	0xe2, 0xbb, 0x0b, 0xf4, 0xcd, 0xb3, 0x3b, 0xf3, 0xfb, 0xcd, 0xfc, 0x66, 0x67, 0x64, 0x68, 0xb9,
-	0x82, 0x8f, 0xa3, 0x98, 0x09, 0x86, 0xe8, 0x04, 0x2c, 0x71, 0xc7, 0x2e, 0x8d, 0xf8, 0x38, 0x76,
-	0xf9, 0xd8, 0x8e, 0x7c, 0x63, 0xe4, 0xf9, 0xe2, 0x22, 0x79, 0x3e, 0x76, 0xd8, 0xdc, 0x4c, 0x2f,
-	0x8e, 0xa5, 0x8f, 0xe9, 0x52, 0x6e, 0xda, 0x91, 0x2f, 0x8f, 0xb2, 0x68, 0xe3, 0x59, 0xc9, 0xd3,
-	0x8b, 0x23, 0xe7, 0x98, 0x3a, 0x8c, 0x2f, 0xb8, 0xa0, 0xca, 0xf4, 0x6c, 0x41, 0x7f, 0xb2, 0x17,
-	0xa6, 0xb8, 0xf0, 0x63, 0xf7, 0xdb, 0xc8, 0x8e, 0xc5, 0xc2, 0xf4, 0x18, 0xf3, 0x02, 0x6a, 0x47,
-	0x3e, 0x57, 0x9f, 0x12, 0xd4, 0x0e, 0x43, 0x26, 0x6c, 0xe1, 0xb3, 0x50, 0x61, 0x93, 0x3b, 0xd0,
-	0x9f, 0xb2, 0x24, 0x76, 0xe8, 0xe3, 0xf0, 0x7b, 0x16, 0xcf, 0xe5, 0x1d, 0xee, 0x43, 0x3d, 0x89,
-	0x03, 0xbd, 0x36, 0xd4, 0x46, 0x2d, 0x2b, 0xfd, 0x24, 0x9f, 0x43, 0xe7, 0x94, 0x46, 0x34, 0x74,
-	0x69, 0xe8, 0x2c, 0x1e, 0xbb, 0x48, 0xa0, 0xc3, 0x62, 0xcf, 0x0e, 0xfd, 0x9f, 0x65, 0x84, 0xae,
-	0x49, 0xd7, 0x95, 0x33, 0x3c, 0x84, 0xc6, 0x9c, 0xb9, 0x49, 0x40, 0x15, 0x90, 0xb2, 0xc8, 0x5f,
-	0x1a, 0xc0, 0xd3, 0x44, 0x58, 0xf4, 0x87, 0x84, 0x72, 0x81, 0x53, 0xe8, 0xf3, 0xf5, 0x0c, 0x24,
-	0x5e, 0x7b, 0x72, 0x67, 0xbc, 0xa9, 0xdb, 0x78, 0x23, 0x5d, 0x6b, 0x33, 0x1e, 0xbf, 0x82, 0xbd,
-	0xb9, 0x1d, 0xda, 0x1e, 0x9d, 0xd3, 0x50, 0x3c, 0xf2, 0x03, 0xca, 0xf5, 0xda, 0xb0, 0x3e, 0x6a,
-	0x4f, 0x1e, 0x94, 0x21, 0x5d, 0x9a, 0x41, 0x2e, 0x4b, 0x3b, 0x5f, 0x09, 0xb2, 0xd6, 0x41, 0xc8,
-	0x43, 0x68, 0xcb, 0xd4, 0x79, 0xc4, 0x42, 0x4e, 0x11, 0xe1, 0x86, 0xc3, 0x5c, 0x2a, 0xd3, 0xdd,
-	0xb1, 0xe4, 0x37, 0xea, 0xd0, 0x9c, 0x53, 0xce, 0x6d, 0x2f, 0xaf, 0x3b, 0x37, 0xc9, 0x9f, 0x1a,
-	0x34, 0xf3, 0xaa, 0x0d, 0xd8, 0x0d, 0xec, 0xd0, 0x4b, 0x52, 0xb7, 0x4c, 0xbc, 0xc2, 0x4e, 0x85,
-	0xcb, 0xda, 0x9b, 0x0b, 0x97, 0x59, 0x1b, 0xa2, 0xef, 0x5c, 0x29, 0x7a, 0xa3, 0x2c, 0x3a, 0x3e,
-	0x84, 0x96, 0xeb, 0xc7, 0xd4, 0x91, 0x81, 0xcd, 0xa1, 0x36, 0xea, 0x4d, 0x5e, 0xad, 0x52, 0xf7,
-	0x34, 0x77, 0xb2, 0x96, 0xfe, 0xe4, 0x0c, 0x76, 0x8b, 0x92, 0x3f, 0x02, 0x70, 0x0b, 0xb9, 0x54,
-	0x9f, 0x86, 0x95, 0x48, 0xa5, 0xf7, 0x62, 0x95, 0x62, 0xc8, 0x23, 0xe8, 0xcd, 0x7c, 0x1a, 0x53,
-	0xb7, 0xc0, 0x7c, 0x17, 0x6e, 0x08, 0x9f, 0xc6, 0xba, 0x26, 0x5b, 0x74, 0x3d, 0x9a, 0xf4, 0x26,
-	0x2f, 0xa0, 0xff, 0x19, 0x15, 0xd9, 0x73, 0xe0, 0xdb, 0xe8, 0xfa, 0x12, 0xfa, 0x91, 0x29, 0x60,
-	0x99, 0x4c, 0x25, 0xfe, 0x21, 0x34, 0xb2, 0xb7, 0xf7, 0xdf, 0x1e, 0xac, 0x0a, 0x22, 0x87, 0x70,
-	0xf3, 0xcc, 0xe7, 0xe2, 0x4c, 0x25, 0x98, 0x17, 0x41, 0xde, 0x83, 0x83, 0xb5, 0x73, 0xc5, 0x77,
-	0x1b, 0x5a, 0x79, 0x35, 0x5c, 0xaa, 0xd5, 0xb2, 0x96, 0x07, 0xe4, 0x7d, 0xd0, 0xd3, 0xb0, 0x27,
-	0xa5, 0x7a, 0xb6, 0xd1, 0x85, 0x7c, 0x03, 0xb7, 0x2a, 0xe2, 0x14, 0xe5, 0x55, 0x82, 0xbe, 0x09,
-	0xdd, 0xb2, 0x78, 0xd9, 0x8c, 0xb5, 0xac, 0xd5, 0x43, 0x32, 0x03, 0x4c, 0xe1, 0xcf, 0xa5, 0x90,
-	0xff, 0xab, 0x51, 0xb5, 0xcd, 0x46, 0x11, 0x06, 0x83, 0x15, 0xd4, 0x2d, 0xd2, 0xdd, 0x02, 0x56,
-	0x4e, 0x6f, 0x06, 0xa9, 0xd7, 0x65, 0x31, 0xb9, 0x79, 0xff, 0x1e, 0xb4, 0x8a, 0xe1, 0xc0, 0x1e,
-	0xc0, 0xe9, 0x93, 0xaf, 0xbf, 0x98, 0xce, 0xac, 0x4f, 0x3f, 0x3e, 0xdf, 0x7f, 0x05, 0x3b, 0xb0,
-	0xfb, 0xe5, 0x53, 0x65, 0x69, 0x93, 0x3f, 0x9a, 0xd0, 0x5f, 0x3e, 0xd8, 0x59, 0x6c, 0x3b, 0x2f,
-	0x68, 0x8c, 0x17, 0xb0, 0xe7, 0x51, 0x51, 0x9c, 0xfb, 0x94, 0xe3, 0x51, 0xd5, 0x7b, 0x51, 0x0a,
-	0x19, 0xb7, 0xab, 0x2f, 0xb3, 0x42, 0x89, 0xfe, 0xeb, 0xdf, 0xff, 0xfc, 0x5e, 0x43, 0xdc, 0x37,
-	0x7f, 0x7c, 0xdb, 0x74, 0x4b, 0xa0, 0x27, 0x1a, 0xfa, 0x50, 0x8f, 0x12, 0x81, 0xaf, 0x55, 0x01,
-	0x2c, 0x37, 0xaf, 0xf1, 0xfa, 0xa5, 0xf7, 0x8a, 0xe3, 0x0d, 0xc9, 0x71, 0x44, 0x0e, 0xd7, 0x39,
-	0x4c, 0x91, 0xd6, 0xf4, 0x81, 0x76, 0x1f, 0xbf, 0x83, 0xb6, 0x47, 0xc5, 0x8c, 0x45, 0x2c, 0x60,
-	0xde, 0xe2, 0x65, 0x0a, 0xba, 0x29, 0xc9, 0x7a, 0xd8, 0x49, 0xc9, 0x84, 0x02, 0x3c, 0xd1, 0x90,
-	0x43, 0xbf, 0xc4, 0x90, 0x6d, 0x8e, 0xab, 0x79, 0x48, 0xd5, 0xe5, 0xea, 0xca, 0x21, 0x47, 0x92,
-	0xed, 0x00, 0x07, 0x65, 0x36, 0x53, 0x48, 0xa7, 0x13, 0x0d, 0x63, 0x00, 0xaf, 0x18, 0x77, 0xac,
-	0x1c, 0xeb, 0x8d, 0xdd, 0x63, 0xdc, 0xbd, 0xce, 0x4d, 0x71, 0x0f, 0x24, 0x77, 0x17, 0xdb, 0x29,
-	0x77, 0xb6, 0x0a, 0xd2, 0xae, 0xfd, 0x02, 0xdd, 0xa0, 0x3c, 0xf5, 0x38, 0xaa, 0xc2, 0xab, 0x5a,
-	0x18, 0xc6, 0xbd, 0x2d, 0x3c, 0x15, 0xf9, 0x81, 0x24, 0xdf, 0xc3, 0x6e, 0x4a, 0x5e, 0xec, 0x0e,
-	0xfc, 0x4d, 0x83, 0x7e, 0xb0, 0xbe, 0x04, 0xf0, 0xc1, 0x65, 0xb8, 0x55, 0x3b, 0xc6, 0x38, 0xde,
-	0xd2, 0x5b, 0x65, 0x72, 0x4b, 0x66, 0x32, 0xc0, 0x7e, 0x9a, 0xc9, 0xca, 0xca, 0x40, 0x0e, 0xed,
-	0x60, 0x39, 0xdc, 0x78, 0xf7, 0x32, 0xe0, 0xd5, 0x9d, 0x62, 0xbc, 0x75, 0xad, 0x5f, 0x55, 0x07,
-	0xd4, 0x80, 0x7f, 0xb2, 0xf3, 0xac, 0x6e, 0x47, 0xfe, 0xf3, 0x86, 0xfc, 0x31, 0x7a, 0xe7, 0xdf,
-	0x00, 0x00, 0x00, 0xff, 0xff, 0x5a, 0x78, 0x67, 0x8f, 0xbf, 0x09, 0x00, 0x00,
+	// 900 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x56, 0x5d, 0x8f, 0xdb, 0x44,
+	0x14, 0xc5, 0x9b, 0xee, 0x47, 0x6e, 0xf6, 0x2b, 0x37, 0xdd, 0x95, 0xeb, 0x2d, 0x10, 0x46, 0xb4,
+	0xa4, 0x55, 0x37, 0x5e, 0xc2, 0xc7, 0x43, 0x2b, 0x24, 0x40, 0xa5, 0xa8, 0xd2, 0x2e, 0xad, 0x9c,
+	0x00, 0x52, 0x25, 0x04, 0x5e, 0x7b, 0xea, 0xb5, 0xea, 0x78, 0x8c, 0x67, 0x0c, 0x0a, 0x88, 0x17,
+	0x5e, 0x79, 0xe4, 0x9d, 0x1f, 0xc1, 0x1b, 0xbf, 0x83, 0xbf, 0xc0, 0x0f, 0x41, 0x1e, 0x8f, 0x1d,
+	0x3b, 0x76, 0xba, 0x81, 0x6a, 0xdf, 0x32, 0x33, 0xf7, 0x9e, 0x73, 0xcf, 0x99, 0xf1, 0xd9, 0x85,
+	0xb6, 0x2b, 0xf8, 0x30, 0x8a, 0x99, 0x60, 0x88, 0x4e, 0xc0, 0x12, 0x77, 0xe8, 0xd2, 0x88, 0x0f,
+	0xd3, 0x5d, 0x3b, 0xf2, 0x8d, 0x81, 0xe7, 0x8b, 0x8b, 0xe4, 0x7c, 0xe8, 0xb0, 0xa9, 0x99, 0x1e,
+	0x1c, 0xcb, 0x1a, 0xd3, 0xa5, 0xdc, 0xb4, 0x23, 0x5f, 0x6e, 0x65, 0xdd, 0xc6, 0xb3, 0x52, 0xa5,
+	0x17, 0x47, 0xce, 0x31, 0x75, 0x18, 0x9f, 0x71, 0x41, 0xd5, 0xd2, 0xb3, 0x05, 0xfd, 0xd1, 0x9e,
+	0x99, 0xe2, 0xc2, 0x8f, 0xdd, 0x6f, 0x23, 0x3b, 0x16, 0x33, 0xd3, 0x63, 0xcc, 0x0b, 0xa8, 0x1d,
+	0xf9, 0x5c, 0xfd, 0x94, 0xa0, 0x76, 0x18, 0x32, 0x61, 0x0b, 0x9f, 0x85, 0x0a, 0x9b, 0xdc, 0x82,
+	0xee, 0x98, 0x25, 0xb1, 0x43, 0x1f, 0x87, 0xcf, 0x59, 0x3c, 0x95, 0x67, 0xb8, 0x0f, 0xad, 0x24,
+	0x0e, 0x74, 0xad, 0xaf, 0x0d, 0xda, 0x56, 0xfa, 0x93, 0xfc, 0xa5, 0x01, 0x3c, 0x4d, 0x84, 0x45,
+	0xbf, 0x4f, 0x28, 0x17, 0x38, 0x86, 0x2e, 0x5f, 0xec, 0x92, 0xe5, 0x9d, 0xd1, 0xad, 0x61, 0x5d,
+	0xeb, 0xb0, 0x46, 0x61, 0xd5, 0xfb, 0xf1, 0x2b, 0xd8, 0x9b, 0xda, 0xa1, 0xed, 0xd1, 0x29, 0x0d,
+	0xc5, 0x23, 0x3f, 0xa0, 0x5c, 0x5f, 0xeb, 0xb7, 0x06, 0x9d, 0xd1, 0xbd, 0x0a, 0x24, 0xcd, 0x20,
+	0x1f, 0xd2, 0x88, 0x86, 0x2e, 0x0d, 0x9d, 0xd9, 0x59, 0xa5, 0xc9, 0x5a, 0x04, 0x21, 0x0f, 0xa0,
+	0x23, 0x47, 0xe7, 0x11, 0x0b, 0x39, 0x45, 0x84, 0x6b, 0x0e, 0x73, 0xa9, 0x1c, 0x77, 0xdd, 0x92,
+	0xbf, 0x51, 0x87, 0xcd, 0x29, 0xe5, 0xdc, 0xf6, 0xa8, 0xbe, 0x26, 0x45, 0xe7, 0x4b, 0xf2, 0x1c,
+	0xb6, 0xe7, 0x4c, 0x8f, 0x5d, 0x34, 0x60, 0x2b, 0xb0, 0x43, 0x2f, 0x49, 0x4b, 0x33, 0x7f, 0x8a,
+	0x35, 0x12, 0xd8, 0x66, 0xb1, 0x67, 0x87, 0xfe, 0x4f, 0x99, 0x21, 0xeb, 0xf2, 0xbc, 0xb2, 0x87,
+	0x87, 0xb0, 0x31, 0x65, 0x6e, 0x12, 0x50, 0x7d, 0x43, 0x9e, 0xaa, 0x55, 0x7a, 0x0f, 0x9f, 0x53,
+	0x91, 0x49, 0x71, 0x73, 0x9b, 0xeb, 0xf7, 0x70, 0x0e, 0x58, 0x2e, 0x53, 0x92, 0x6a, 0x75, 0x78,
+	0x1f, 0x36, 0x33, 0x1b, 0x5c, 0xe5, 0x61, 0xbf, 0xe9, 0x5a, 0xca, 0xca, 0xac, 0xbc, 0x81, 0xfc,
+	0xa1, 0xc1, 0x66, 0x3e, 0xc1, 0x15, 0xc9, 0xc5, 0x07, 0xd0, 0x76, 0xfd, 0x98, 0x3a, 0xb2, 0x71,
+	0xb3, 0xaf, 0x0d, 0x76, 0x47, 0xaf, 0x37, 0x4e, 0x98, 0x17, 0x59, 0xf3, 0x7a, 0x72, 0x0a, 0x5b,
+	0x85, 0xf4, 0x8f, 0x01, 0xdc, 0x42, 0x85, 0x7a, 0x82, 0x97, 0x6b, 0x2d, 0xf5, 0x90, 0x47, 0xb0,
+	0x3b, 0xf1, 0x69, 0x5c, 0xb2, 0xf3, 0x7d, 0xb8, 0x26, 0x7c, 0x1a, 0xeb, 0xda, 0x8a, 0xce, 0xc9,
+	0x6a, 0xf2, 0x42, 0xde, 0x60, 0xf6, 0xd2, 0xf9, 0x15, 0xfb, 0x47, 0xc6, 0xf2, 0x1d, 0x14, 0x64,
+	0x6a, 0xf0, 0x8f, 0x60, 0x23, 0xfb, 0xac, 0xfe, 0xdb, 0xb7, 0xa8, 0x9a, 0xc8, 0x21, 0x5c, 0x3f,
+	0xf5, 0xb9, 0x38, 0x55, 0x03, 0xe6, 0x22, 0xc8, 0x07, 0x70, 0xb0, 0xb0, 0xaf, 0xf8, 0x6e, 0x42,
+	0x3b, 0x57, 0xc3, 0xa5, 0x5b, 0x6d, 0x6b, 0xbe, 0x41, 0x3e, 0x04, 0x3d, 0x6d, 0x7b, 0x52, 0xd2,
+	0xb3, 0x8a, 0x2f, 0xe4, 0x1b, 0xb8, 0xd1, 0xd0, 0xa7, 0x28, 0x5f, 0x66, 0xe8, 0xdb, 0xb0, 0x53,
+	0x36, 0x2f, 0x8b, 0x8f, 0xb6, 0x55, 0xdd, 0x24, 0x13, 0xc0, 0x14, 0xfe, 0x4c, 0x1a, 0xf9, 0xbf,
+	0x2e, 0x6a, 0xad, 0x7e, 0x51, 0x84, 0x41, 0xaf, 0x82, 0xba, 0xc2, 0xb8, 0x2b, 0xc0, 0xca, 0x60,
+	0xca, 0x20, 0xf5, 0x96, 0x14, 0x93, 0x2f, 0xef, 0xde, 0x81, 0x76, 0xf1, 0x71, 0xe0, 0x2e, 0xc0,
+	0xc3, 0x27, 0x5f, 0x7f, 0x31, 0x9e, 0x58, 0x9f, 0x7d, 0x72, 0xb6, 0xff, 0x1a, 0x6e, 0xc3, 0xd6,
+	0x97, 0x4f, 0xd5, 0x4a, 0x1b, 0xfd, 0xb9, 0x05, 0xdd, 0xf9, 0x83, 0x9d, 0xc4, 0xb6, 0xf3, 0x82,
+	0xc6, 0x78, 0x01, 0x7b, 0x1e, 0x15, 0xc5, 0xbe, 0x4f, 0x39, 0x1e, 0x35, 0xbd, 0x17, 0xe5, 0x90,
+	0x71, 0xb3, 0xf9, 0x30, 0x13, 0x4a, 0xf4, 0x5f, 0xff, 0xfe, 0xe7, 0xf7, 0x35, 0xc4, 0x7d, 0xf3,
+	0x87, 0x77, 0x4d, 0xb7, 0x04, 0x7a, 0xa2, 0xa1, 0x0f, 0xad, 0x28, 0x11, 0xf8, 0x46, 0x13, 0xc0,
+	0xfc, 0x8f, 0x8a, 0xf1, 0xe6, 0xd2, 0x73, 0xc5, 0xf1, 0x96, 0xe4, 0x38, 0x22, 0x87, 0x8b, 0x1c,
+	0xa6, 0x48, 0x35, 0xdd, 0xd7, 0xee, 0xe2, 0x2f, 0x00, 0x5e, 0x91, 0x8f, 0xd8, 0xf8, 0xfe, 0x6b,
+	0x31, 0x6b, 0xdc, 0xbe, 0xac, 0x4c, 0xf1, 0xf7, 0x25, 0xbf, 0x81, 0x7a, 0x8d, 0x5f, 0x45, 0x27,
+	0x7e, 0x07, 0x1d, 0x8f, 0x8a, 0x09, 0x8b, 0x58, 0xc0, 0xbc, 0xd9, 0xab, 0xf8, 0x79, 0x5d, 0x72,
+	0xed, 0xe2, 0x76, 0xca, 0x25, 0x14, 0xe0, 0x89, 0x86, 0x1c, 0xba, 0x25, 0x86, 0x2c, 0xb8, 0x5e,
+	0xce, 0x43, 0x9a, 0x0e, 0xab, 0x89, 0x47, 0x8e, 0x24, 0xdb, 0x01, 0xf6, 0xca, 0x6c, 0xa6, 0x90,
+	0x45, 0x27, 0x1a, 0xc6, 0xd2, 0x55, 0x95, 0x36, 0x4b, 0x5d, 0xad, 0x46, 0xdf, 0x52, 0x57, 0x17,
+	0x42, 0x8b, 0xf4, 0x24, 0xf7, 0x0e, 0x76, 0x52, 0xee, 0x2c, 0x89, 0xd2, 0x47, 0xf3, 0x33, 0xec,
+	0x04, 0xe5, 0xd0, 0xc1, 0x41, 0x13, 0x5e, 0x53, 0x5e, 0x19, 0x77, 0x56, 0xa8, 0x54, 0xe4, 0x07,
+	0x92, 0x7c, 0x0f, 0x77, 0x52, 0xf2, 0x22, 0xba, 0xf0, 0x37, 0x0d, 0xba, 0xc1, 0x62, 0x06, 0xe1,
+	0xbd, 0x65, 0xb8, 0x4d, 0x11, 0x67, 0x1c, 0xaf, 0x58, 0xad, 0x26, 0xb9, 0x21, 0x27, 0xe9, 0x61,
+	0x37, 0x9d, 0xa4, 0x92, 0x58, 0xc8, 0xa1, 0x13, 0xcc, 0xb3, 0x05, 0x6f, 0x2f, 0x03, 0xae, 0x46,
+	0x9a, 0xf1, 0xce, 0xa5, 0x75, 0x4d, 0x37, 0xa0, 0xf2, 0xe5, 0xd3, 0xf5, 0x67, 0x2d, 0x3b, 0xf2,
+	0xcf, 0x37, 0xe4, 0xbf, 0x89, 0xef, 0xfd, 0x1b, 0x00, 0x00, 0xff, 0xff, 0x83, 0xd9, 0xf2, 0x20,
+	0xcd, 0x0a, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -810,6 +899,7 @@ const _ = grpc.SupportPackageIsVersion4
 type DependencyTrackerClient interface {
 	GetDependencies(ctx context.Context, in *Request, opts ...grpc.CallOption) (DependencyTracker_GetDependenciesClient, error)
 	Put(ctx context.Context, in *PutRequest, opts ...grpc.CallOption) (*PutResponse, error)
+	GetManaged(ctx context.Context, in *GetManagedRequest, opts ...grpc.CallOption) (*GetManagedResponse, error)
 	GetTopology(ctx context.Context, in *Request, opts ...grpc.CallOption) (DependencyTracker_GetTopologyClient, error)
 	GetTopologyTiered(ctx context.Context, in *Request, opts ...grpc.CallOption) (DependencyTracker_GetTopologyTieredClient, error)
 	GetSources(ctx context.Context, in *GetSourcesRequest, opts ...grpc.CallOption) (DependencyTracker_GetSourcesClient, error)
@@ -827,7 +917,7 @@ func NewDependencyTrackerClient(cc *grpc.ClientConn) DependencyTrackerClient {
 }
 
 func (c *dependencyTrackerClient) GetDependencies(ctx context.Context, in *Request, opts ...grpc.CallOption) (DependencyTracker_GetDependenciesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[0], "/cloud.deps.rds.api.DependencyTracker/getDependencies", opts...)
+	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[0], "/cloud.deps.dts.api.DependencyTracker/getDependencies", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -860,7 +950,16 @@ func (x *dependencyTrackerGetDependenciesClient) Recv() (*Response, error) {
 
 func (c *dependencyTrackerClient) Put(ctx context.Context, in *PutRequest, opts ...grpc.CallOption) (*PutResponse, error) {
 	out := new(PutResponse)
-	err := c.cc.Invoke(ctx, "/cloud.deps.rds.api.DependencyTracker/put", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.deps.dts.api.DependencyTracker/put", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dependencyTrackerClient) GetManaged(ctx context.Context, in *GetManagedRequest, opts ...grpc.CallOption) (*GetManagedResponse, error) {
+	out := new(GetManagedResponse)
+	err := c.cc.Invoke(ctx, "/cloud.deps.dts.api.DependencyTracker/getManaged", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -868,7 +967,7 @@ func (c *dependencyTrackerClient) Put(ctx context.Context, in *PutRequest, opts 
 }
 
 func (c *dependencyTrackerClient) GetTopology(ctx context.Context, in *Request, opts ...grpc.CallOption) (DependencyTracker_GetTopologyClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[1], "/cloud.deps.rds.api.DependencyTracker/getTopology", opts...)
+	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[1], "/cloud.deps.dts.api.DependencyTracker/getTopology", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -900,7 +999,7 @@ func (x *dependencyTrackerGetTopologyClient) Recv() (*Response, error) {
 }
 
 func (c *dependencyTrackerClient) GetTopologyTiered(ctx context.Context, in *Request, opts ...grpc.CallOption) (DependencyTracker_GetTopologyTieredClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[2], "/cloud.deps.rds.api.DependencyTracker/getTopologyTiered", opts...)
+	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[2], "/cloud.deps.dts.api.DependencyTracker/getTopologyTiered", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -932,7 +1031,7 @@ func (x *dependencyTrackerGetTopologyTieredClient) Recv() (*TieredResponse, erro
 }
 
 func (c *dependencyTrackerClient) GetSources(ctx context.Context, in *GetSourcesRequest, opts ...grpc.CallOption) (DependencyTracker_GetSourcesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[3], "/cloud.deps.rds.api.DependencyTracker/getSources", opts...)
+	stream, err := c.cc.NewStream(ctx, &_DependencyTracker_serviceDesc.Streams[3], "/cloud.deps.dts.api.DependencyTracker/getSources", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -965,7 +1064,7 @@ func (x *dependencyTrackerGetSourcesClient) Recv() (*GetSourcesResponse, error) 
 
 func (c *dependencyTrackerClient) ListLanguages(ctx context.Context, in *ListLanguagesRequest, opts ...grpc.CallOption) (*ListLanguagesResponse, error) {
 	out := new(ListLanguagesResponse)
-	err := c.cc.Invoke(ctx, "/cloud.deps.rds.api.DependencyTracker/listLanguages", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.deps.dts.api.DependencyTracker/listLanguages", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -974,7 +1073,7 @@ func (c *dependencyTrackerClient) ListLanguages(ctx context.Context, in *ListLan
 
 func (c *dependencyTrackerClient) ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error) {
 	out := new(ListOrganizationsResponse)
-	err := c.cc.Invoke(ctx, "/cloud.deps.rds.api.DependencyTracker/listOrganizations", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.deps.dts.api.DependencyTracker/listOrganizations", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -983,7 +1082,7 @@ func (c *dependencyTrackerClient) ListOrganizations(ctx context.Context, in *Lis
 
 func (c *dependencyTrackerClient) ListModules(ctx context.Context, in *ListModulesRequest, opts ...grpc.CallOption) (*ListModulesResponse, error) {
 	out := new(ListModulesResponse)
-	err := c.cc.Invoke(ctx, "/cloud.deps.rds.api.DependencyTracker/listModules", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.deps.dts.api.DependencyTracker/listModules", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -994,6 +1093,7 @@ func (c *dependencyTrackerClient) ListModules(ctx context.Context, in *ListModul
 type DependencyTrackerServer interface {
 	GetDependencies(*Request, DependencyTracker_GetDependenciesServer) error
 	Put(context.Context, *PutRequest) (*PutResponse, error)
+	GetManaged(context.Context, *GetManagedRequest) (*GetManagedResponse, error)
 	GetTopology(*Request, DependencyTracker_GetTopologyServer) error
 	GetTopologyTiered(*Request, DependencyTracker_GetTopologyTieredServer) error
 	GetSources(*GetSourcesRequest, DependencyTracker_GetSourcesServer) error
@@ -1011,6 +1111,9 @@ func (*UnimplementedDependencyTrackerServer) GetDependencies(req *Request, srv D
 }
 func (*UnimplementedDependencyTrackerServer) Put(ctx context.Context, req *PutRequest) (*PutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Put not implemented")
+}
+func (*UnimplementedDependencyTrackerServer) GetManaged(ctx context.Context, req *GetManagedRequest) (*GetManagedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetManaged not implemented")
 }
 func (*UnimplementedDependencyTrackerServer) GetTopology(req *Request, srv DependencyTracker_GetTopologyServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTopology not implemented")
@@ -1066,10 +1169,28 @@ func _DependencyTracker_Put_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.deps.rds.api.DependencyTracker/Put",
+		FullMethod: "/cloud.deps.dts.api.DependencyTracker/Put",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DependencyTrackerServer).Put(ctx, req.(*PutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DependencyTracker_GetManaged_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetManagedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DependencyTrackerServer).GetManaged(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cloud.deps.dts.api.DependencyTracker/GetManaged",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DependencyTrackerServer).GetManaged(ctx, req.(*GetManagedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1147,7 +1268,7 @@ func _DependencyTracker_ListLanguages_Handler(srv interface{}, ctx context.Conte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.deps.rds.api.DependencyTracker/ListLanguages",
+		FullMethod: "/cloud.deps.dts.api.DependencyTracker/ListLanguages",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DependencyTrackerServer).ListLanguages(ctx, req.(*ListLanguagesRequest))
@@ -1165,7 +1286,7 @@ func _DependencyTracker_ListOrganizations_Handler(srv interface{}, ctx context.C
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.deps.rds.api.DependencyTracker/ListOrganizations",
+		FullMethod: "/cloud.deps.dts.api.DependencyTracker/ListOrganizations",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DependencyTrackerServer).ListOrganizations(ctx, req.(*ListOrganizationsRequest))
@@ -1183,7 +1304,7 @@ func _DependencyTracker_ListModules_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.deps.rds.api.DependencyTracker/ListModules",
+		FullMethod: "/cloud.deps.dts.api.DependencyTracker/ListModules",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DependencyTrackerServer).ListModules(ctx, req.(*ListModulesRequest))
@@ -1192,12 +1313,16 @@ func _DependencyTracker_ListModules_Handler(srv interface{}, ctx context.Context
 }
 
 var _DependencyTracker_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "cloud.deps.rds.api.DependencyTracker",
+	ServiceName: "cloud.deps.dts.api.DependencyTracker",
 	HandlerType: (*DependencyTrackerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "put",
 			Handler:    _DependencyTracker_Put_Handler,
+		},
+		{
+			MethodName: "getManaged",
+			Handler:    _DependencyTracker_GetManaged_Handler,
 		},
 		{
 			MethodName: "listLanguages",
