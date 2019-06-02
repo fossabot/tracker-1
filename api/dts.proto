@@ -3,12 +3,13 @@ syntax = "proto3";
 package cloud.deps.rds.api;
 
 import "github.com/deps-cloud/des/api/deps.proto";
+import "github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/google/api/annotations.proto";
 
 option go_package = "api";
 
 enum Direction {
-    UPSTREAM = 0;
-    DOWNSTREAM = 1;
+    DOWNSTREAM = 0;
+    UPSTREAM = 1;
 }
 
 message SourceInformation {
@@ -87,14 +88,52 @@ message ListModulesResponse {
 }
 
 service DependencyTracker {
-    rpc put(PutRequest) returns (PutResponse);
+    rpc getDependencies(Request) returns (stream Response) {
+        option (google.api.http) = {
+            get: "/v1/dependencies"
+        };
+    };
 
-    rpc getDependencies(Request) returns (stream Response);
-    rpc getTopology(Request) returns (stream Response);
-    rpc getTopologyTiered(Request) returns (stream TieredResponse);
-    rpc getSources(GetSourcesRequest) returns (stream GetSourcesResponse);
+    rpc put(PutRequest) returns (PutResponse) {
+        option (google.api.http) = {
+            post: "/v1/dependencies/track"
+            body: "*"
+        };
+    }
 
-    rpc listLanguages(ListLanguagesRequest) returns (ListLanguagesResponse);
-    rpc listOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
-    rpc listModules(ListModulesRequest) returns (ListModulesResponse);
+    rpc getTopology(Request) returns (stream Response) {
+        option (google.api.http) = {
+            get: "/v1/topology"
+        };
+    }
+
+    rpc getTopologyTiered(Request) returns (stream TieredResponse) {
+        option (google.api.http) = {
+            get: "/v1/topology/tiered"
+        };
+    }
+
+    rpc getSources(GetSourcesRequest) returns (stream GetSourcesResponse) {
+        option (google.api.http) = {
+            get: "/v1/sources"
+        };
+    }
+
+    rpc listLanguages(ListLanguagesRequest) returns (ListLanguagesResponse) {
+        option (google.api.http) = {
+            get: "/v1/languages"
+        };
+    }
+
+    rpc listOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {
+        option (google.api.http) = {
+            get: "/v1/organizations"
+        };
+    }
+
+    rpc listModules(ListModulesRequest) returns (ListModulesResponse) {
+        option (google.api.http) = {
+            get: "/v1/modules"
+        };
+    }
 }
