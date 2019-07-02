@@ -404,7 +404,7 @@
         "dependencies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/desapiDependency"
+            "$ref": "#/definitions/extractorapiDependency"
           }
         }
       }
@@ -420,7 +420,7 @@
         }
       }
     },
-    "desapiDependency": {
+    "extractorapiDependency": {
       "type": "object",
       "properties": {
         "organization": {

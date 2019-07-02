@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package cloud.deps.dts.api;
+package cloud.deps.tracker.api;
 
-import "github.com/deps-cloud/des/api/deps.proto";
+import "github.com/deps-cloud/extractor/api/deps.proto";
 import "github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/google/api/annotations.proto";
 
 option go_package = "api";
@@ -18,7 +18,7 @@ message SourceInformation {
 
 message PutRequest {
     SourceInformation sourceInformation = 1;
-    repeated cloud.deps.des.api.DependencyManagementFile managementFiles = 2;
+    repeated cloud.deps.extractor.api.DependencyManagementFile managementFiles = 2;
 }
 
 message PutResponse {
