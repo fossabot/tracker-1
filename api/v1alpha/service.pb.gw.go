@@ -500,9 +500,9 @@ func RegisterSourceServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_SourceService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1alpha", "sources"}, ""))
+	pattern_SourceService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1alpha", "sources"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_SourceService_Track_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "sources", "track"}, ""))
+	pattern_SourceService_Track_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "sources", "track"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
@@ -613,11 +613,11 @@ func RegisterModuleServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_ModuleService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1alpha", "modules"}, ""))
+	pattern_ModuleService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1alpha", "modules"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ModuleService_GetSource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "modules", "source"}, ""))
+	pattern_ModuleService_GetSource_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "modules", "source"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_ModuleService_GetManaged_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "modules", "managed"}, ""))
+	pattern_ModuleService_GetManaged_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1alpha", "modules", "managed"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
@@ -710,9 +710,9 @@ func RegisterDependencyServiceHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_DependencyService_GetDependents_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1alpha", "graph", "language", "dependents"}, ""))
+	pattern_DependencyService_GetDependents_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1alpha", "graph", "language", "dependents"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyService_GetDependencies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1alpha", "graph", "language", "dependencies"}, ""))
+	pattern_DependencyService_GetDependencies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1alpha", "graph", "language", "dependencies"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
@@ -843,13 +843,13 @@ func RegisterTopologyServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
-	pattern_TopologyService_GetDependentsTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1alpha", "graph", "language", "dependents", "topology"}, ""))
+	pattern_TopologyService_GetDependentsTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1alpha", "graph", "language", "dependents", "topology"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_TopologyService_GetDependentsTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4, 2, 5}, []string{"v1alpha", "graph", "language", "dependents", "topology", "tiered"}, ""))
+	pattern_TopologyService_GetDependentsTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4, 2, 5}, []string{"v1alpha", "graph", "language", "dependents", "topology", "tiered"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_TopologyService_GetDependenciesTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1alpha", "graph", "language", "dependencies", "topology"}, ""))
+	pattern_TopologyService_GetDependenciesTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1alpha", "graph", "language", "dependencies", "topology"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_TopologyService_GetDependenciesTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4, 2, 5}, []string{"v1alpha", "graph", "language", "dependencies", "topology", "tiered"}, ""))
+	pattern_TopologyService_GetDependenciesTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4, 2, 5}, []string{"v1alpha", "graph", "language", "dependencies", "topology", "tiered"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

@@ -448,23 +448,23 @@ func RegisterDependencyTrackerHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_DependencyTracker_GetDependencies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "dependencies"}, ""))
+	pattern_DependencyTracker_GetDependencies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "dependencies"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_Put_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "track"}, ""))
+	pattern_DependencyTracker_Put_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "track"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_GetManaged_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "managed"}, ""))
+	pattern_DependencyTracker_GetManaged_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "dependencies", "managed"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_GetTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topology"}, ""))
+	pattern_DependencyTracker_GetTopology_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topology"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_GetTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "topology", "tiered"}, ""))
+	pattern_DependencyTracker_GetTopologyTiered_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "topology", "tiered"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_GetSources_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "sources"}, ""))
+	pattern_DependencyTracker_GetSources_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "sources"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_ListLanguages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "languages"}, ""))
+	pattern_DependencyTracker_ListLanguages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "languages"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_ListOrganizations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "organizations"}, ""))
+	pattern_DependencyTracker_ListOrganizations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "organizations"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_DependencyTracker_ListModules_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "modules"}, ""))
+	pattern_DependencyTracker_ListModules_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "modules"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
